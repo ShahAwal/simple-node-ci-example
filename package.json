@@ -1,0 +1,31 @@
+{
+  "name": "simple-node-app",
+  "version": "1.0.0",
+  "description": "A basic Node.js example project for demonstrating CI workflows.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "lint": "eslint .",
+    "test": "node calculator.test.js",
+    "build": "echo 'No build step required for this simple project.'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git"
+  },
+  "keywords": [
+    "node",
+    "ci",
+    "example",
+    "github-actions"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/YOUR_REPOSITORY/issues"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/YOUR_REPOSITORY#readme",
+  "devDependencies": {
+    "eslint": "^8.57.1"
+  }
+}
