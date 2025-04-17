@@ -1,0 +1,57 @@
+# .github/workflows/ci.yml
+
+# Name for the workflow
+name: Node.js CI Workflow (From Scratch Example)
+
+# Triggers: Run on push/pull_request to main branch
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# Jobs to run
+jobs:
+  # Job identifier
+  build-lint-test:
+    # Runner environment
+    runs-on: ubuntu-latest
+
+    # Steps for the job
+    steps:
+      # 1. Checkout repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x' # Use Node.js v20
+          cache: 'npm'        # Enable npm dependency caching
+
+      # 3. Install dependencies
+      # Uses 'npm ci' which installs based on package-lock.json (faster, more reliable for CI)
+      # Requires package-lock.json to be committed to the repository.
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Run Linter
+      # Executes the 'lint' script defined in package.json ('eslint .')
+      - name: Run linter
+        run: npm run lint
+
+      # 5. Run Tests
+      # Executes the 'test' script defined in package.json ('node calculator.test.js')
+      # If the test script fails (e.g., an assertion fails), this step will fail the job.
+      - name: Run tests
+        run: npm test
+
+      # 6. Run Build step (if applicable)
+      # Executes the 'build' script defined in package.json
+      # In our case, it just prints a message: 'echo "No build..."'
+      - name: Run build step
+        run: npm run build
+
+      # No artifact upload needed for this simple example as 'build' doesn't produce files.
+
